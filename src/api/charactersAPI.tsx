@@ -7,3 +7,7 @@ const instance = axios.create({
 export const getCharacters = (page: number = 1) => {
     return instance.get(`/?page=${page}`).then((res:any) => res.data.results);
 }
+
+export const getCharacter = (id: string) => {
+    return instance.get(`/${id}`).then((res:any)=> res.data);
+}
