@@ -27,9 +27,9 @@ let CharacterReducer = (state:InitStateType = initState, action: any):InitStateT
 
 export const setCharacters = (characters:any):any => ({type: SET_CHARACTERS, characters});
 
-export const getCharactersThunk = ():any => {
+export const getCharactersThunk = (page:number = 1):any => {
     return (dispatch: any) => {
-        getCharacters().then((res:any) => {
+        getCharacters(page).then((res:any) => {
             dispatch(setCharacters(res));
         });
     }

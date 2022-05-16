@@ -10,7 +10,11 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from "@mui/icons-material/Menu";
 import {IconButton} from "@mui/material";
-
+import {NavLink} from "react-router-dom";
+import InfoIcon from '@mui/icons-material/Info';
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+import PublicIcon from '@mui/icons-material/Public';
+import TheatersIcon from '@mui/icons-material/Theaters';
 
 const Menu = () => {
     const [state, setState] = React.useState(false);
@@ -38,25 +42,27 @@ const Menu = () => {
             onKeyDown={toggleDrawer(false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
+                {['Characters', 'Locations', 'Episodes'].map((text, index) => (
+                    <NavLink to={"/" + text.toLowerCase()}>
+                        <ListItem button key={text}>
+                            <ListItemIcon>
+                                { text == "Characters" ? <AccessibilityNewIcon /> : text == "Locations" ? <PublicIcon/> : <TheatersIcon/>}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    </NavLink>
                 ))}
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
+                <NavLink to={"/about"}>
+                    <ListItem button>
                         <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            <InfoIcon />
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText primary={"About"} />
                     </ListItem>
-                ))}
+                </NavLink>
             </List>
         </Box>
     );
