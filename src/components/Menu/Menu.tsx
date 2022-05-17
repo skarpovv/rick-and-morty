@@ -43,12 +43,12 @@ const Menu = () => {
         >
             <List>
                 {['Characters', 'Locations', 'Episodes'].map((text, index) => (
-                    <NavLink to={"/" + text.toLowerCase()}>
-                        <ListItem button key={text}>
-                            <ListItemIcon>
+                    <NavLink key={text} to={"/" + text.toLowerCase()}>
+                        <ListItem button>
+                            <ListItemIcon >
                                 { text == "Characters" ? <AccessibilityNewIcon /> : text == "Locations" ? <PublicIcon/> : <TheatersIcon/>}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText sx={{"& span":{fontFamily: "'Quicksand', sans-serif"}}} primary={text} />
                         </ListItem>
                     </NavLink>
                 ))}

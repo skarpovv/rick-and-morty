@@ -15,7 +15,6 @@ let StyledCharacter = {
     borderRadius: "30px",
     overflow: "hidden",
     fontWeight: "1000",
-    fontFamily: "Arial",
     backgroundColor: "#555",
     textAlign: "center",
     "& a":{
@@ -31,10 +30,12 @@ let StyledCharacter = {
 
 const Character = (props: CharacterPropsType) => {
     return (
-        <Box sx={StyledCharacter}>
-            <div><img src={props.url} alt={props.name} width={250} height={250}/></div>
-            <div><Link to={`${props.id}`}>{(props.name.length > 22) ? props.name.slice(0,20) + "..." : props.name}</Link></div>
-        </Box>
+        <Link to={`${props.id}`}>
+            <Box sx={StyledCharacter}>
+                <div><img src={props.url} alt={props.name} width={250} height={250}/></div>
+                <div>{(props.name.length > 22) ? props.name.slice(0,20) + "..." : props.name}</div>
+            </Box>
+        </Link>
     );
 };
 
