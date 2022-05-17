@@ -57,7 +57,7 @@ const Header = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        MUI
+                        Rick and Morty
                     </Typography>
                     <Search>
                         <SearchIconWrapper>

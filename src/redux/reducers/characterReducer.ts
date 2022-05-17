@@ -1,21 +1,33 @@
 import {getCharacter, getCharacters} from "../../api/charactersAPI";
 import {Dispatch} from "redux";
 
-type SetCharactersType = {
+type SetCharactersActionType = {
     type: typeof SET_CHARACTERS,
     characters: Array<CharacterType>,
 }
-type SetCharacterType = {
+type SetCharacterActionType = {
     type: typeof SET_CHARACTER,
     character: CharacterType,
+}
+type SetPagesActionType = {
+    type: typeof SET_PAGES,
+    pages: number,
+}
+type SetCurrentPageActionType = {
+    type: typeof SET_CURRENT_PAGE,
+    page: number,
 }
 
 let SET_CHARACTERS = "SET_CHARACTERS";
 let SET_CHARACTER = "SET_CHARACTER";
+let SET_PAGES = "SET_PAGES";
+let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 type InitStateType = {
     charactersArray: Array<CharacterType>,
     character: CharacterType,
+    pages: number,
+    currentPage: number,
 }
 type CharacterType = {
     id: number,
@@ -39,7 +51,9 @@ type CharacterType = {
 
 let initState: InitStateType = {
     charactersArray: [],
-    character: null
+    character: null,
+    pages: 0,
+    currentPage: 1,
 }
 
 let CharacterReducer = (state:InitStateType = initState, action: any):InitStateType => {
@@ -53,24 +67,37 @@ let CharacterReducer = (state:InitStateType = initState, action: any):InitStateT
         case SET_CHARACTER:{
             return {...state, character: action.character}
         }
+        case SET_PAGES:{
+            if (state.pages) return state;
+            return {...state, pages: action.pages}
+        }
+        case SET_CURRENT_PAGE:{
+            return {...state, currentPage: action.page};
+        }
         default:
             return state;
     }
 }
 
-const setCharacters = (characters:Array<CharacterType>):SetCharactersType => ({type: SET_CHARACTERS, characters});
-const setCharacter = (character: CharacterType):SetCharacterType => ({type: SET_CHARACTER,character});
+const setCharacters = (characters:Array<CharacterType>):SetCharactersActionType => ({type: SET_CHARACTERS, characters});
+const setCharacter = (character: CharacterType):SetCharacterActionType => ({type: SET_CHARACTER,character});
+const setPages = (pages: number):SetPagesActionType => ({type: SET_PAGES, pages});
+const setCurrentPage = (page: number):SetCurrentPageActionType => ({type: SET_CURRENT_PAGE, page});
+
 
 export const getCharactersThunk = (page:number = 1):any => {
     return (dispatch: Dispatch) => {
         getCharacters(page).then((res) => {
-            dispatch(setCharacters(res));
+            dispatch(setPages(res.info.pages));
+            dispatch(setCurrentPage(page));
+            dispatch(setCharacters(res.results));
         });
     }
 }
 
 export const getCharacterThunk = (id: string):any => {
     return (dispatch: Dispatch) => {
+        dispatch(setCharacter(null));
         getCharacter(id).then((res:any) => {
             dispatch(setCharacter(res));
         })
