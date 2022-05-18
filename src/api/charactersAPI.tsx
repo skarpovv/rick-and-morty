@@ -11,3 +11,7 @@ export const getCharacters = (page: number = 1) => {
 export const getCharacter = (id: string) => {
     return instance.get(`/${id}`).then((res:any)=> res.data);
 }
+
+export const getCharactersFilter = (filter: string) => {
+    return instance.get(`/?name=${filter}`).then((res:any) => res.data);
+}

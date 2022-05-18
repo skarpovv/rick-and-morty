@@ -1,4 +1,4 @@
-import {getCharacter, getCharacters} from "../../api/charactersAPI";
+import {getCharacter, getCharacters, getCharactersFilter} from "../../api/charactersAPI";
 import {Dispatch} from "redux";
 
 type SetCharactersActionType = {
@@ -68,7 +68,6 @@ let CharacterReducer = (state:InitStateType = initState, action: any):InitStateT
             return {...state, character: action.character}
         }
         case SET_PAGES:{
-            if (state.pages) return state;
             return {...state, pages: action.pages}
         }
         case SET_CURRENT_PAGE:{
@@ -100,6 +99,17 @@ export const getCharacterThunk = (id: string):any => {
         dispatch(setCharacter(null));
         getCharacter(id).then((res:any) => {
             dispatch(setCharacter(res));
+        })
+    }
+}
+
+export const getCharactersFilterThunk = (filter: string):any => {
+    return (dispatch: Dispatch) => {
+        getCharactersFilter(filter).then((res:any) => {
+            console.log(res.info.pages);
+            dispatch(setPages(res.info.pages));
+            dispatch(setCurrentPage(1));
+            dispatch(setCharacters(res.results))
         })
     }
 }

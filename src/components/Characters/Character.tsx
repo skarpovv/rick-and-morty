@@ -29,6 +29,7 @@ let StyledCharacter = {
 }
 
 const Character = (props: CharacterPropsType) => {
+    console.log("Character ")
     return (
         <Link to={`${props.id}`}>
             <Box sx={StyledCharacter}>
