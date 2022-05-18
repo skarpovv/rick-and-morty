@@ -11,7 +11,7 @@ const Header = () => {
                 <Toolbar sx={{textAlign: "center"}}>
                     <Menu/>
                     <div style={{width: "90%"}}>
-                        <img src={Logo} width={300} />
+                        <img src={Logo} width={250} />
                     </div>
                 </Toolbar>
             </AppBar>

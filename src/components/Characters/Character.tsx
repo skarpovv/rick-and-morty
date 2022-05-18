@@ -29,11 +29,10 @@ let StyledCharacter = {
 }
 
 const Character = (props: CharacterPropsType) => {
-    console.log("Character ")
     return (
-        <Link to={`${props.id}`}>
+        <Link to={`${props.id}`} style={{color:"white"}}>
             <Box sx={StyledCharacter}>
-                <div><img src={props.url} alt={props.name} width={250} height={250}/></div>
+                <div><img src={props.url} alt={props.name} width={220} height={220}/></div>
                 <div>{(props.name.length > 22) ? props.name.slice(0,20) + "..." : props.name}</div>
             </Box>
         </Link>

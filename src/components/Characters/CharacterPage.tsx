@@ -8,6 +8,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 let StyledCharacterPageBox = {
     backgroundColor: "#FBF976",
+    height: "500px",
     display: "flex",
     padding: "40px",
     justifyContent: "space-around",
@@ -16,11 +17,11 @@ let StyledCharacterPageBox = {
 }
 let StyledImage = {
     height: "300px",
-    marginRight: "50px",
     border: "5px solid black",
     borderRadius: "50px",
     overflow: "hidden",
-    boxShadow: "0px 0px 30px 5px rgba(0, 181, 204, 0.8)"
+    boxShadow: "0px 0px 30px 5px rgba(0, 181, 204, 0.8)",
+    minWidth: "300px",
 }
 
 const CharacterPage = () => {
