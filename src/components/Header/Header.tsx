@@ -7,7 +7,7 @@ import Logo from "../../assets/RickAndMortyLogo.png";
 const Header = () => {
     return (
         <Box sx={{ flexGrow: 1}}>
-            <AppBar position="static" sx={{backgroundColor: "#1F1E46"}}>
+            <AppBar position="static" sx={{backgroundColor: "#00B5CC"}}>
                 <Toolbar sx={{textAlign: "center"}}>
                     <Menu/>
                     <div style={{width: "90%"}}>

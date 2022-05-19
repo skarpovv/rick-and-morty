@@ -6,6 +6,10 @@ import Character from "./Character";
 import useDebounce from "../../hooks/useDebounce";
 import CloseIcon from '@mui/icons-material/Close';
 
+let StyledInput = {
+    flexGrow: "1",
+}
+
 let StyledCharactersList = {
     display: "flex",
     flexWrap: "wrap",
@@ -14,18 +18,23 @@ let StyledCharactersList = {
     justifyContent: "space-around",
     maxWidth: "1800px",
     alignItems: "center",
+    backgroundColor: "#FEFBE8",
+    height: "100%",
 }
 let StyledPagiation = {
-    background: "linear-gradient(0deg, rgba(251,249,118,1) 13%, rgba(87,206,0,1) 95%, rgba(31,30,70,1) 96%)",
+    background: "linear-gradient(0deg, rgba(254,251,232,1) 2%, rgba(0,181,204,1) 100%)",
     margin: "0 auto",
     lineHeight: "50px",
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
     flexDirection: "column",
-    padding: "0 30px",
+    padding: "0 15px",
     "& nav":{
-        minWidth: "306px",
+        minWidth: "343px",
+    },
+    "& label":{
+        color: "black",
     }
 }
 
@@ -61,16 +70,18 @@ const Characters = () => {
 
 
     return (
-        <Box sx={{backgroundColor: "#FBF976"}}>
+        <Box sx={{height: "100%"}}>
             <Box sx={StyledPagiation}>
+                <Box sx={{display: "flex", alignItems: "center"}}>
+                    <TextField sx={StyledInput} ref={inputRef} id="outlined-basic" label="Character..."  variant="standard"
+                               onChange={(event)=>{dispatch(onTextChange(event.target.value))}}
+                               value={val}/>
+                    <CloseIcon onClick={e => {dispatch(onTextChange(""))}}/>
+                </Box>
                 <Pagination count={pages} page={currentPage} size="medium" onChange={changePage} />
-                <TextField sx={StyledInput} ref={inputRef} id="outlined-basic" label="Outlined" variant="standard"
-                           onChange={(event)=>{dispatch(onTextChange(event.target.value))}}
-                           value={val}/>
-                <CloseIcon/>
             </Box>
             <Box sx={StyledCharactersList}>
-                {(Chtrs) ? CharactersList : <h1>No results</h1>}
+                {(Chtrs.length === 0 && val !== "") ? <h1>No results</h1> : CharactersList}
             </Box>
         </Box>
     );

@@ -9,19 +9,24 @@ type CharacterPropsType = {
 }
 
 let StyledCharacter = {
-    padding: "0px",
+    ":hover":{
+      scale: "1.05",
+    },
+    transition: "all ease 0.2s",
+    padding: "0 0 5px 0",
     margin: "0 auto",
-    border: "5px solid #333",
+    border: "5px solid #000",
     borderRadius: "30px",
     overflow: "hidden",
     fontWeight: "1000",
-    backgroundColor: "#555",
+    backgroundColor: "#A9D3E9",
     textAlign: "center",
+    color: "black",
     "& a":{
-        color: "white",
+        color: "black",
     },
     "& img":{
-        borderRadius: "20px",
+        borderRadius: "20px 20px 0 0",
     },
     "&":{
         margin: "10px"
