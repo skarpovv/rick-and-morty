@@ -1,8 +1,8 @@
 import React from 'react';
-import {alpha, AppBar, Box, InputBase, styled, Toolbar, Typography} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import {AppBar, Box, Toolbar} from "@mui/material";
 import Menu from "../Menu/Menu";
 import Logo from "../../assets/RickAndMortyLogo.png";
+import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
@@ -11,7 +11,7 @@ const Header = () => {
                 <Toolbar sx={{textAlign: "center"}}>
                     <Menu/>
                     <div style={{width: "90%"}}>
-                        <img src={Logo} width={250} />
+                        <Link to=""><img src={Logo} width={250} /></Link>
                     </div>
                 </Toolbar>
             </AppBar>

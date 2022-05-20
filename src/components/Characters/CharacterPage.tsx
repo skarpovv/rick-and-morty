@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {getCharacterThunk} from "../../redux/reducers/characterReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -46,34 +46,46 @@ const CharacterPage = () => {
         dispatch(getCharacterThunk(param.id));
     },[])
 
-
     return (
         (person) ?
-            <Box sx={StyledCharacterPageBox}>
-                <Box sx={StyledImage}>
-                    <img src={person.image}></img>
-                </Box>
+            <Box>
+                <Box sx={StyledCharacterPageBox}>
+                    <Box sx={StyledImage}>
+                        <img src={person.image}></img>
+                    </Box>
 
-                <Box sx={{ paddingLeft:"30px"}}>
-                    <h1 style = {{fontWeight: "1000"}}>{person.name}</h1>
-                    <h3 style={StyledProperty}>
-                        Status: {person.status}   {(person.status === "Dead") ? <SentimentVeryDissatisfiedIcon color="error"/> :
-                        (person.status === "Alive") ? <SentimentVerySatisfiedIcon sx={{color:"#090"}}/>
-                            : <QuestionMarkIcon sx={{color:"#709"}}/>}
-                    </h3>
-                    <h3 style={StyledProperty}>
-                        Gender: {person.gender}   {(person.gender == "Male") ? <MaleIcon sx={{color: "#09b"}}/> :
-                        (person.gender == "Female") ? <FemaleIcon sx={{color: "#f0f"}}/> : <TransgenderIcon sx={{color: "#709"}} />}
-                    </h3>
-                    <h3 style={StyledProperty}>Class: {person.species}</h3>
-                    <h3 style={StyledProperty}>
-                        Home: 
-                        <span style={{cursor: "pointer", textDecoration:"underline"}} onClick={()=>{goLocation(createLocationId(person.origin.url))}}>
-                        {person.origin.name}
+                    <Box sx={{ paddingLeft:"30px"}}>
+                        <h1 style = {{fontWeight: "1000"}}>{person.name}</h1>
+                        <h3 style={StyledProperty}>
+                            Status: {person.status}   {(person.status === "Dead") ? <SentimentVeryDissatisfiedIcon color="error"/> :
+                            (person.status === "Alive") ? <SentimentVerySatisfiedIcon sx={{color:"#090"}}/>
+                                : <QuestionMarkIcon sx={{color:"#709"}}/>}
+                        </h3>
+                        <h3 style={StyledProperty}>
+                            Gender: {person.gender}   {(person.gender == "Male") ? <MaleIcon sx={{color: "#09b"}}/> :
+                            (person.gender == "Female") ? <FemaleIcon sx={{color: "#f0f"}}/> : <TransgenderIcon sx={{color: "#709"}} />}
+                        </h3>
+                        <h3 style={StyledProperty}>Class: {person.species}</h3>
+                        <h3 style={StyledProperty}>
+
+                            <span style={{cursor: "pointer", textDecoration:"underline"}}
+                                  onClick={()=>{
+                                      if (person.origin.name === "unknown") return;
+                                      goLocation(createLocationId(person.origin.url))}
+                                  }>
+                        Home: {person.origin.name}
                         </span>
-                    </h3>
+                        </h3>
+                    </Box>
                 </Box>
 
+                <Box>
+                    <ul>
+                    {person.episode.map((el:any) => {
+                        return <li key={el.id}>{el.name}</li>
+                    })}
+                    </ul>
+                </Box>
             </Box>
             :
             <Preloader/>

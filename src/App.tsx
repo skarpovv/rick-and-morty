@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import store from "./redux/store";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import CharacterPage from "./components/Characters/CharacterPage";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <div className="App">
                 <Header/>
                 <Routes>
+                    <Route path="/" element={<Home/>} />
                     <Route path="/characters" element={<Characters/>} />
                     <Route path="/characters/:id" element={<CharacterPage/>} />
                 </Routes>

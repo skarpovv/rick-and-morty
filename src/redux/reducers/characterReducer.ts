@@ -1,5 +1,6 @@
 import {getCharacter, getCharacters} from "../../api/charactersAPI";
 import {Dispatch} from "redux";
+import {getMultipleEpisodes} from "../../api/episodesAPI";
 
 type SetCharactersActionType = {
     type: typeof SET_CHARACTERS,
@@ -21,7 +22,12 @@ type OnTextChangeActionType = {
     type: typeof ON_TEXT_CHANGE,
     text: string,
 }
+type SetCharacterEpisodesActionType = {
+    type: typeof SET_CHARACTER_EPISODES,
+    episodes: Array<any>,
+}
 
+const SET_CHARACTER_EPISODES = "SET_CHARACTER_EPISODES";
 let SET_CHARACTERS = "SET_CHARACTERS";
 let SET_CHARACTER = "SET_CHARACTER";
 let SET_PAGES = "SET_PAGES";
@@ -50,7 +56,7 @@ type CharacterType = {
         "url": string,
     },
     image: string,
-    episode: Array<string>,
+    episode: Array<any>,
     url: string,
     created?:string,
 }
@@ -83,6 +89,12 @@ let CharacterReducer = (state:InitStateType = initState, action: any):InitStateT
         case ON_TEXT_CHANGE:{
             return {...state, inputValue: action.text}
         }
+        case SET_CHARACTER_EPISODES:{
+            return {
+                ...state,
+                character: {...state.character, episode: (Array.isArray(action.episodes)) ? action.episodes : [action.episodes]}
+            }
+        }
         default:
             return state;
     }
@@ -93,6 +105,7 @@ const setCharacter = (character: CharacterType):SetCharacterActionType => ({type
 const setPages = (pages: number):SetPagesActionType => ({type: SET_PAGES, pages});
 const setCurrentPage = (page: number):SetCurrentPageActionType => ({type: SET_CURRENT_PAGE, page});
 export const onTextChange = (text: string):OnTextChangeActionType => ({type: ON_TEXT_CHANGE, text});
+const setCharacterEpisodesAction = (episodes: Array<any>): SetCharacterEpisodesActionType => ({type: SET_CHARACTER_EPISODES, episodes});
 
 
 export const getCharactersThunk = (page:number = 1, filter:string = ""):any => {
@@ -108,26 +121,23 @@ export const getCharactersThunk = (page:number = 1, filter:string = ""):any => {
     }
 }
 
+let getEpisodeId = (urlArray: Array<string>):Array<string> => urlArray.map((el:string) => {
+    return el.replace("https://rickandmortyapi.com/api/episode/", "")
+})
+
 export const getCharacterThunk = (id: string):any => {
     return (dispatch: Dispatch) => {
         dispatch(setCharacter(null));
         getCharacter(id).then((res:any) => {
+            let idArray = getEpisodeId(res.episode);
+            res.episode = [];
             dispatch(setCharacter(res));
+            getMultipleEpisodes(idArray).then((res:any) => {
+                dispatch(setCharacterEpisodesAction(res));
+            })
         })
     }
 }
-
-/*export const getCharactersFilterThunk = (filter: string):any => {
-    return (dispatch: Dispatch) => {
-        getCharactersFilter(filter).then((res:any) => {
-            dispatch(setPages(res.info.pages));
-            dispatch(setCurrentPage(1));
-            dispatch(setCharacters(res.results))
-        }).catch((rej:any) => {
-            dispatch(setCharacters([]));
-        })
-    }
-}*/
 
 
 export default CharacterReducer;
