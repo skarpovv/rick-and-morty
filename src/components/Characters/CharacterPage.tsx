@@ -1,17 +1,25 @@
 import React, {useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {getCharacterThunk} from "../../redux/reducers/characterReducer";
 import {useDispatch, useSelector} from "react-redux";
 import Preloader from "./../Preloader";
 import {Box} from "@mui/material";
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
+import TransgenderIcon from '@mui/icons-material/Transgender';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+
+let StyledProperty = {
+    display:"flex",
+    alignItems: "center"
+}
 
 let StyledCharacterPageBox = {
-    backgroundColor: "#FBF976",
-    height: "500px",
     display: "flex",
     padding: "40px",
-    justifyContent: "space-around",
+    justifyContent: "center",
     flexWrap: "wrap",
     fontFamily: "'Quicksand', sans-serif"
 }
@@ -24,14 +32,20 @@ let StyledImage = {
     minWidth: "300px",
 }
 
+let createLocationId = (url: string):string => url.replace("https://rickandmortyapi.com/api/location/","");
+
+
 const CharacterPage = () => {
     let param = useParams();
+    let navigate = useNavigate();
     let dispatch = useDispatch();
     let person = useSelector((state:any) => state.characters.character);
+    const goLocation = (id: string) => navigate("/locations/"+id);
 
     useEffect(() => {
         dispatch(getCharacterThunk(param.id));
     },[])
+
 
     return (
         (person) ?
@@ -40,11 +54,24 @@ const CharacterPage = () => {
                     <img src={person.image}></img>
                 </Box>
 
-                <Box sx={{flexGrow: "1"}}>
-                    <h1>{person.name}</h1>
-                    <h2>Status: {person.status}</h2>
-                    <h2>Class: {person.species}</h2>
-                    <h2>Gender: {person.gender}</h2>
+                <Box sx={{ paddingLeft:"30px"}}>
+                    <h1 style = {{fontWeight: "1000"}}>{person.name}</h1>
+                    <h3 style={StyledProperty}>
+                        Status: {person.status}   {(person.status === "Dead") ? <SentimentVeryDissatisfiedIcon color="error"/> :
+                        (person.status === "Alive") ? <SentimentVerySatisfiedIcon sx={{color:"#090"}}/>
+                            : <QuestionMarkIcon sx={{color:"#709"}}/>}
+                    </h3>
+                    <h3 style={StyledProperty}>
+                        Gender: {person.gender}   {(person.gender == "Male") ? <MaleIcon sx={{color: "#09b"}}/> :
+                        (person.gender == "Female") ? <FemaleIcon sx={{color: "#f0f"}}/> : <TransgenderIcon sx={{color: "#709"}} />}
+                    </h3>
+                    <h3 style={StyledProperty}>Class: {person.species}</h3>
+                    <h3 style={StyledProperty}>
+                        Home: 
+                        <span style={{cursor: "pointer", textDecoration:"underline"}} onClick={()=>{goLocation(createLocationId(person.origin.url))}}>
+                        {person.origin.name}
+                        </span>
+                    </h3>
                 </Box>
 
             </Box>

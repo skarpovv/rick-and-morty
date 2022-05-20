@@ -3,7 +3,7 @@ import PreloaderGif from "./../assets/Preloader.gif";
 
 const Preloader = () => {
     return (
-        <div style={{backgroundColor: "#FBF976", textAlign: "center"}}>
+        <div style={{backgroundColor: "#fff", textAlign: "center"}}>
             <img src={PreloaderGif}></img>
         </div>
     );
