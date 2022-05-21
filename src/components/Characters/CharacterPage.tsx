@@ -10,30 +10,15 @@ import TransgenderIcon from '@mui/icons-material/Transgender';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-
-let StyledProperty = {
-    display:"flex",
-    alignItems: "center"
-}
-
-let StyledCharacterPageBox = {
-    display: "flex",
-    padding: "40px",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    fontFamily: "'Quicksand', sans-serif"
-}
-let StyledImage = {
-    height: "300px",
-    border: "5px solid black",
-    borderRadius: "50px",
-    overflow: "hidden",
-    boxShadow: "0px 0px 30px 5px rgba(0, 181, 204, 0.8)",
-    minWidth: "300px",
-}
+import {
+    StyledCharacterPageBox,
+    StyledContainer,
+    StyledEpisodes,
+    StyledImage,
+    StyledProperty
+} from './CharacterPageStyles';
 
 let createLocationId = (url: string):string => url.replace("https://rickandmortyapi.com/api/location/","");
-
 
 const CharacterPage = () => {
     let param = useParams();
@@ -41,6 +26,7 @@ const CharacterPage = () => {
     let dispatch = useDispatch();
     let person = useSelector((state:any) => state.characters.character);
     const goLocation = (id: string) => navigate("/locations/"+id);
+    const goEpisode = (id: string) => navigate("/episodes/"+id);
 
     useEffect(() => {
         dispatch(getCharacterThunk(param.id));
@@ -48,7 +34,7 @@ const CharacterPage = () => {
 
     return (
         (person) ?
-            <Box>
+            <Box sx={StyledContainer}>
                 <Box sx={StyledCharacterPageBox}>
                     <Box sx={StyledImage}>
                         <img src={person.image}></img>
@@ -79,12 +65,12 @@ const CharacterPage = () => {
                     </Box>
                 </Box>
 
-                <Box>
-                    <ul>
-                    {person.episode.map((el:any) => {
-                        return <li key={el.id}>{el.name}</li>
+                <Box sx={StyledEpisodes}>
+                    <h2>Episodes:</h2>
+                    {person.episode.map((el:any, i:number) => {
+                        return <div onClick={()=>{goEpisode(el.id)}} key={el.id}>{i+1}. {el.name}</div>
                     })}
-                    </ul>
+
                 </Box>
             </Box>
             :

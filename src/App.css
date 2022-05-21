@@ -3,8 +3,8 @@
 .App {
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
-  height: 100%;
-  background-color: #FEFBE8;
+
+  /*background-color: #FEFBE8;*/
 }
 
 a{
