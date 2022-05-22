@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 type CharacterPropsType = {
     name: string,
@@ -34,13 +34,15 @@ let StyledCharacter = {
 }
 
 const Character = (props: CharacterPropsType) => {
+    let navigate = useNavigate();
+    let goCharacterPage = () => navigate("/characters/"+props.id);
     return (
-        <Link to={`${props.id}`} style={{color:"white"}}>
+        <span onClick={()=>{goCharacterPage()}} style={{color:"white"}}>
             <Box sx={StyledCharacter}>
                 <div><img src={props.url} alt={props.name} width={220} height={220}/></div>
                 <div>{(props.name.length > 22) ? props.name.slice(0,20) + "..." : props.name}</div>
             </Box>
-        </Link>
+        </span>
     );
 };
 

@@ -11,3 +11,7 @@ export const getMultipleEpisodes = (idArray: Array<string>) => {
 export const getEpisode = (id: string) => {
     return instance.get('/'+id).then((res:any) => res.data);
 }
+
+export const getEpisodes = (page:number = 1) => {
+    return instance.get("/?page=" + page).then((res:any) => res.data);
+}

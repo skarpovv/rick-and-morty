@@ -41,7 +41,7 @@ type InitStateType = {
     currentPage: number,
     inputValue: string,
 }
-type CharacterType = {
+export type CharacterType = {
     id: number,
     name: string,
     status: string,

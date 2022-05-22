@@ -8,6 +8,7 @@ import {HashRouter, Route, Routes} from "react-router-dom";
 import CharacterPage from "./components/Characters/CharacterPage";
 import Home from "./components/Home/Home";
 import EpisodePage from "./components/Episodes/EpisodePage";
+import Episodes from "./components/Episodes/Episodes";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/characters" element={<Characters/>} />
                     <Route path="/characters/:id" element={<CharacterPage/>} />
                     <Route path="/episodes/:id" element={<EpisodePage/>} />
+                    <Route path="/episodes" element={<Episodes/>} />
                 </Routes>
             </div>
           </Provider>
