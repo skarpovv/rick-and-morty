@@ -12,3 +12,7 @@ export const getCharacter = (id: string) => {
     return instance.get(`/${id}`).then((res:any)=> res.data);
 }
 
+export const getMultipleCharacters = (arrayId: Array<string>) => {
+    return instance.get('/'+arrayId).then((res:any)=>res.data);
+}
+

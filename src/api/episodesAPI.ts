@@ -7,3 +7,7 @@ const instance = axios.create({
 export const getMultipleEpisodes = (idArray: Array<string>) => {
     return instance.get('/'+idArray).then((res:any) => res.data);
 }
+
+export const getEpisode = (id: string) => {
+    return instance.get('/'+id).then((res:any) => res.data);
+}

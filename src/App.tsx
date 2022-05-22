@@ -7,6 +7,7 @@ import store from "./redux/store";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import CharacterPage from "./components/Characters/CharacterPage";
 import Home from "./components/Home/Home";
+import EpisodePage from "./components/Episodes/EpisodePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/" element={<Home/>} />
                     <Route path="/characters" element={<Characters/>} />
                     <Route path="/characters/:id" element={<CharacterPage/>} />
+                    <Route path="/episodes/:id" element={<EpisodePage/>} />
                 </Routes>
             </div>
           </Provider>
