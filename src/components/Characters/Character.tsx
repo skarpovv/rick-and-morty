@@ -39,7 +39,7 @@ const Character = (props: CharacterPropsType) => {
     return (
         <span onClick={()=>{goCharacterPage()}} style={{color:"white"}}>
             <Box sx={StyledCharacter}>
-                <div><img src={props.url} alt={props.name} width={220} height={220}/></div>
+                <div><img loading={"lazy"} src={props.url} alt={props.name} width={220} height={220}/></div>
                 <div>{(props.name.length > 22) ? props.name.slice(0,20) + "..." : props.name}</div>
             </Box>
         </span>
