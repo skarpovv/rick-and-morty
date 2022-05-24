@@ -17,6 +17,7 @@ import {
     StyledImage,
     StyledProperty
 } from './CharacterPageStyles';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 let createLocationId = (url: string):string => url.replace("https://rickandmortyapi.com/api/location/","");
 
@@ -27,6 +28,7 @@ const CharacterPage = () => {
     let person = useSelector((state:any) => state.characters.character);
     const goLocation = (id: string) => navigate("/locations/"+id);
     const goEpisode = (id: string) => navigate("/episodes/"+id);
+    const goBack = () => navigate(-1);
 
     useEffect(() => {
         dispatch(getCharacterThunk(param.id));
@@ -35,6 +37,7 @@ const CharacterPage = () => {
     return (
         (person) ?
             <Box sx={StyledContainer}>
+                <div className="arrowBack"><ArrowBackIosIcon onClick={()=>{goBack()}}/></div>
                 <Box sx={StyledCharacterPageBox}>
                     <Box sx={StyledImage}>
                         <img src={person.image}></img>

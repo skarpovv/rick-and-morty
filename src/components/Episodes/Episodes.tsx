@@ -3,6 +3,7 @@ import {Box, Pagination} from "@mui/material";
 import {getEpisodesThunk} from "../../redux/reducers/episodeReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import Preloader from "../Preloader";
 
 export const getSE = (se:string) => {
     let season = "";
@@ -63,8 +64,8 @@ const Episodes = () => {
                 <Pagination count={pages} page={currentPage} size="medium" onChange={changePage} />
                 {episodes.map((el:any) => {
                     return (
-                        <Link to={""+el.id}>
-                        <div className="episode" key={el.id}>
+                        <Link key={el.id} to={""+el.id}>
+                        <div className="episode">
                             <h5><span className="se">Season {getSE(el.episode).season}, Episode {getSE(el.episode).episode}</span></h5>
                             <h4>{el.name}</h4>
                         </div>
@@ -74,7 +75,7 @@ const Episodes = () => {
             </Box>
             :
             <Box>
-                <h1>Wait</h1>
+                <Preloader/>
             </Box>
     );
 };

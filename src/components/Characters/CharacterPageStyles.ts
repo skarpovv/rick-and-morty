@@ -5,14 +5,19 @@ export const StyledProperty = {
 
 export const StyledContainer = {
     backgroundColor: "#FEFBE8",
+    ".arrowBack":{
+        textAlign: "start",
+        padding: "20px 20px 0px 20px",
+        cursor: "pointer",
+    },
 }
 
 export const StyledCharacterPageBox = {
     display: "flex",
-    padding: "40px",
+    padding: "0px 40px 40px 40px",
     justifyContent: "center",
     flexWrap: "wrap",
-    fontFamily: "'Quicksand', sans-serif"
+    fontFamily: "'Quicksand', sans-serif",
 }
 export const StyledImage = {
     height: "300px",
@@ -21,6 +26,7 @@ export const StyledImage = {
     overflow: "hidden",
     boxShadow: "0px 0px 30px 5px rgba(0, 181, 204, 0.8)",
     minWidth: "300px",
+
 }
 export const StyledEpisodes = {
     textAlign: "center",

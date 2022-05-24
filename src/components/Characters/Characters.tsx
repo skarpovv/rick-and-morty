@@ -49,7 +49,7 @@ const Characters = () => {
     let firstRender = useRef(true);
 
     let CharactersList = useMemo(()=>Chtrs.map((el:any) => {
-        return <Character key={el.id} id = {el.id} name={el.name} url={el.image}/>}),[Chtrs]);
+        return <Character size={220} key={el.id} id = {el.id} name={el.name} url={el.image} />}),[Chtrs]);
 
     useEffect(()=> {
         if (Chtrs.length !== 0) return;

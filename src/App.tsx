@@ -9,6 +9,9 @@ import CharacterPage from "./components/Characters/CharacterPage";
 import Home from "./components/Home/Home";
 import EpisodePage from "./components/Episodes/EpisodePage";
 import Episodes from "./components/Episodes/Episodes";
+import LocationPage from "./components/Locations/LocationPage";
+import About from "./components/About";
+import Locations from "./components/Locations/Locations";
 
 function App() {
   return (
@@ -20,8 +23,11 @@ function App() {
                     <Route path="/" element={<Home/>} />
                     <Route path="/characters" element={<Characters/>} />
                     <Route path="/characters/:id" element={<CharacterPage/>} />
-                    <Route path="/episodes/:id" element={<EpisodePage/>} />
                     <Route path="/episodes" element={<Episodes/>} />
+                    <Route path="/episodes/:id" element={<EpisodePage/>} />
+                    <Route path="/locations" element={<Locations/>} />
+                    <Route path="/locations/:id" element={<LocationPage/>} />
+                    <Route path="/about" element={<About/>} />
                 </Routes>
             </div>
           </Provider>

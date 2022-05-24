@@ -84,7 +84,7 @@ const setPages = (pages: number):SetPagesActionType => ({type: SET_EPISODES_PAGE
 const setCurrentPage = (currentPage: number):SetCurrentPageActionType => ({type: SET_EPISODES_CURRENT_PAGE, currentPage});
 const setEpisodes = (episodes:Array<EpisodeType>):SetEpisodesActionType => ({type: SET_EPISODES, episodes});
 
-let getCharactersId = (urlArray: Array<string>):Array<string> => urlArray.map((el:string) => {
+export const getCharactersId = (urlArray: Array<string>):Array<string> => urlArray.map((el:string) => {
     return el.replace("https://rickandmortyapi.com/api/character/", "")
 })
 

@@ -13,6 +13,7 @@ export const getCharacter = (id: string) => {
 }
 
 export const getMultipleCharacters = (arrayId: Array<string>) => {
+    if (arrayId.length === 0) return new Promise((resolve) => {resolve([])});
     return instance.get('/'+arrayId).then((res:any)=>res.data);
 }
 
